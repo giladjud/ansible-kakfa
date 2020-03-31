@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Ensure ssh directory exists.
+      file: 
+        dest: "{{ key_file | dirname }}"
+        mode: 0700 
+        state: directory
+        owner: "{{ local_user }}"
+    
+    - name: Remove old ssh key
+      file: 
+        dest: "{{ key_file }}"
+        state: absent
+    
+    - name: Install ssh key
+      copy: 
+        content: "{{ vault_private_key }}" 
+        dest: "{{ key_file }}"
+        mode: 0600
+        owner: "{{ local_user }}"
+        
+  vars:
+    - local_user: "{{ lookup('env', 'USER') }}"
+    - key_file: "./../ssh/id_rsa_ansible"

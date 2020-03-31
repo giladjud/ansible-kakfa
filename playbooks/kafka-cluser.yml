@@ -1,0 +1,5 @@
+---
+- hosts: kafka_servers
+  roles:
+    - install-java
+    - kafka-cluster

@@ -1,0 +1,34 @@
+---
+- name: systemctl script - zookeeper
+  copy:
+    src: zookeeper.service
+    dest: "/etc/systemd/system/zookeeper.service"
+    owner: root
+    group: root
+    mode: 0755
+  become: yes
+
+- name: systemctl script - kafka
+  copy:
+    src: kafka.service
+    dest: "/etc/systemd/system/kafka.service"
+    owner: root
+    group: root
+    mode: 0755
+  become: yes
+
+- name: Configure zookeeper service to start on boot
+  systemd:
+    name: zookeeper
+    enabled: yes
+    state: started
+    daemon_reload: yes
+  become: yes  
+
+- name: Configure kafka service to start on boot
+  systemd:
+    name: kafka
+    enabled: yes
+    state: started
+    daemon_reload: yes
+  become: yes  

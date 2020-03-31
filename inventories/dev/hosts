@@ -1,0 +1,4 @@
+[kafka_servers]
+kafka1.dev.example.com zk_id=1
+kafka2.dev.example.com zk_id=2
+kafka3.dev.example.com zk_id=3
